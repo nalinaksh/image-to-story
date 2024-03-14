@@ -33,7 +33,7 @@ def caption_to_story(image_caption):
 
   return response.choices[0].message.content
 
-model = get_model
+model = get_model()
 processor = get_processor()
 
 def image_to_text(image):
