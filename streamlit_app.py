@@ -3,6 +3,7 @@ from transformers import BlipForConditionalGeneration, AutoProcessor
 # from huggingface_hub import snapshot_download
 from openai import OpenAI
 import streamlit as st
+from PIL import Image
 import os
 
 model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
@@ -40,10 +41,7 @@ uploaded_file = st.file_uploader("Choose a file", type=['png', 'jpg'])
 
 # If user attempts to upload a file.
 if uploaded_file is not None:
-    bytes_data = uploaded_file.getvalue()
-
-    # Show the image filename and image.
-    st.write(f'filename: {uploaded_file.name}')
-    st.image(bytes_data)
-    story = image_to_text(bytes_data)
+    image = Image.open(uploaded_file)
+    st.image(image, caption="Uploaded Image")
+    story = image_to_text(image)
     st.write(story)
