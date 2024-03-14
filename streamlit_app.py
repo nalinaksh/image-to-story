@@ -4,9 +4,22 @@ import streamlit as st
 from PIL import Image
 import os
 
-model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
-processor = AutoProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
-client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+@st.cache_resource
+def get_model():
+  model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
+  return model
+
+@st.cache_resource
+def get_processor():
+  processor = AutoProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
+  return processor
+
+@st.cache_resource
+def get_client():
+  client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+  return client
+
+client = get_client()
 
 def caption_to_story(image_caption):
   response = client.chat.completions.create(
@@ -19,6 +32,9 @@ def caption_to_story(image_caption):
     )
 
   return response.choices[0].message.content
+
+model = get_model
+processor = get_processor()
 
 def image_to_text(image):
     inputs = processor(image,return_tensors="pt")
