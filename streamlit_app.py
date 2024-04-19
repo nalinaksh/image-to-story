@@ -3,6 +3,11 @@ from openai import OpenAI
 import streamlit as st
 from PIL import Image
 import os
+from authenticate import *
+
+#Authenticate user
+if not check_password():
+    st.stop()
 
 @st.cache_resource
 def get_model():
