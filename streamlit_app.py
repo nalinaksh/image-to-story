@@ -9,7 +9,8 @@ from authenticate import *
 if not check_password():
     st.stop()
 
-st.title("Image to short story generator. Upload an image to generate a story")
+st.title("Image to short story generator")
+st.write("Upload an image to generate a story")
 
 @st.cache_resource
 def get_model():
