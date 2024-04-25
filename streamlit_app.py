@@ -52,7 +52,7 @@ def image_to_text(image):
     return story
 
 #upload image 
-uploaded_file = st.sidebar.file_uploader("Choose a file", type=['png', 'jpg'])
+uploaded_file = st.sidebar.file_uploader("Upload an image", type=['png', 'jpg'])
 
 # If user attempts to upload a file.
 if uploaded_file is not None:
