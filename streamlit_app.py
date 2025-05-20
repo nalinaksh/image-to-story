@@ -1,4 +1,4 @@
-from transformers import BlipForConditionalGeneration, AutoProcessor
+from transformers import BlipForConditionalGeneration, BlipProcessor
 from openai import OpenAI
 import streamlit as st
 from PIL import Image
@@ -19,7 +19,7 @@ def get_model():
 
 @st.cache_resource
 def get_processor():
-  processor = AutoProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
+  processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
   return processor
 
 @st.cache_resource
